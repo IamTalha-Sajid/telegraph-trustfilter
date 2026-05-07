@@ -20,7 +20,7 @@ export function createAnalyzeRoute(
   router.post("/analyze", async (req: Request, res: Response) => {
     const parsed = AnalyzeBodySchema.safeParse(req.body);
     if (!parsed.success) {
-      const message = parsed.error.errors[0]?.message ?? "Invalid request body.";
+      const message = parsed.error.issues[0]?.message ?? "Invalid request body.";
       res.status(400).json({ error: { message } });
       return;
     }
